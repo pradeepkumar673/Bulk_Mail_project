@@ -9,14 +9,15 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb+srv://bulkmail_user:787673ATYTmustang@cluster0.d56ci4f.mongodb.net/bulkmail_user?retryWrites=true&w=majority&appName=Cluster0",
+    process.env.MONGO_URI ||
+      "mongodb+srv://bulkmail_user:787673ATYTmustang@cluster0.d56ci4f.mongodb.net/bulkmail_user?retryWrites=true&w=majority&appName=Cluster0",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
   )
   .then(async () => {
-    console.log("✅ MongoDB connected successfully");
+    console.log(" MongoDB connected successfully");
 
     const collinfo = await mongoose.connection.db
       .listCollections({ name: "authentication" })
@@ -24,9 +25,7 @@ mongoose
 
     if (!collinfo) {
       console.error(
-        "❌ Authentication collection not found.\nRun in MongoDB shell:\n" +
-          `db.createCollection("authentication")\n` +
-          `db.authentication.insertOne({ user: "your@gmail.com", pass: "your-app-password" })`
+        "Authentication collection not found." 
       );
       process.exit(1);
     }
@@ -37,9 +36,7 @@ mongoose
       .toArray();
 
     if (!authData || authData.length === 0) {
-      console.error(
-        " No credentials found. h:\n"
-      );
+      console.error(" No credentials found.");
       process.exit(1);
     }
 
@@ -49,7 +46,6 @@ mongoose
       process.exit(1);
     }
 
-  
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: { user, pass },
@@ -89,8 +85,9 @@ mongoose
     process.exit(1);
   });
 
-app.listen(8000, () => {
-  console.log(" Server running on port 8000");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
 
 process.on("unhandledRejection", (err) => {

@@ -79,7 +79,7 @@ const Mail = () => {
             placeholder="Enter Subject"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="w-full p-3 mb-4 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
+            className="text-gray-400 w-full p-3 mb-4 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
           />
 
           
@@ -87,7 +87,7 @@ const Mail = () => {
             placeholder="Write your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full p-3 mb-4 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all h-32 resize-none"
+            className="text-gray-400 w-full p-3 mb-4 rounded-lg bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all h-32 resize-none"
           ></textarea>
 
           <input
@@ -119,7 +119,7 @@ const Mail = () => {
           >
             {loading ? "Sending..." : " Send Mail"}
           </button>
-
+ 
           {status && (
             <p className="mt-4 text-center text-cyan-300 animate-fade-in">
               {status}

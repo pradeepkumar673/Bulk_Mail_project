@@ -39,7 +39,7 @@ const Mail = () => {
     setStatus("Cooking emails... 🚀");
 
     try {
-      const res = await axios.post("http://localhost:8000/messagesend", {
+      const res = await axios.post("https://bulk-mail-project-2-backend.onrender.com/messagesend", {
         subject,
         message,
         emaillist: recipients,
